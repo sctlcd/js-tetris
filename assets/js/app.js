@@ -1,10 +1,10 @@
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
 
-context.scale(20, 20);
-
 context.fillStyle = 'darkgrey';
 context.fillRect(0, 0, canvas.width, canvas.height);
+
+context.scale(20, 20);
 
 const matrix = [
     [0, 0, 0],
@@ -33,9 +33,16 @@ function drawMatrix(matrix, offset) {
     });
 };
 
+// Update function
+function update() {
+    draw();
+    requestAnimationFrame(update);
+}
+
 const player = {
     position: { x: 5, y: 5 },
     matrix: matrix,
 }
 
-draw();
+// Initialize the game 
+update();
