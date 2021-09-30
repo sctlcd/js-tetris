@@ -12,21 +12,24 @@ const matrix = [
     [0, 1, 0],
 ];
 
-// Draw the matrix 
+// General draw function 
+function draw() {
+    drawMatrix(player.matrix, player.position);
+}
+
+// Draw the matrix function
 function drawMatrix(matrix, offset) {
     matrix.forEach((row, y) => {
-        if (row !== undefined) {
-            row.forEach((value, x) => {
-                if (value !== 0) {
-                    context.fillStyle = 'red';
-                    context.fillRect(
-                        x + offset.x,
-                        y + offset.y,
-                        1, 1
-                    );
-                }
-            });
-        }
+        row.forEach((value, x) => {
+            if (value !== 0) {
+                context.fillStyle = 'red';
+                context.fillRect(
+                    x + offset.x,
+                    y + offset.y,
+                    1, 1
+                );
+            }
+        });
     });
 };
 
@@ -35,5 +38,4 @@ const player = {
     matrix: matrix,
 }
 
-
-drawMatrix(player.matrix, player.position);
+draw();
