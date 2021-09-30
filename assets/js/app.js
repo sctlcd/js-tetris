@@ -1,9 +1,6 @@
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
 
-context.fillStyle = 'darkgrey';
-context.fillRect(0, 0, canvas.width, canvas.height);
-
 context.scale(20, 20);
 
 const matrix = [
@@ -14,6 +11,10 @@ const matrix = [
 
 // General draw function 
 function draw() {
+    // Clearing the canvas
+    context.fillStyle = 'darkgrey';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
     drawMatrix(player.matrix, player.position);
 }
 
