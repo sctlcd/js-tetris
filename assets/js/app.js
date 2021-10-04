@@ -18,6 +18,12 @@ let lastTime = 0;
 let dropCounter = 0;
 let dropInterval = 1000;
 
+// Drop player function
+function playerDrop() {
+    player.position.y++;
+    dropCounter = 0;
+}
+
 // General draw function 
 function draw() {
     // Clearing the canvas
@@ -51,8 +57,7 @@ function update(time = 0) {
     // the tetromino drops every second
     dropCounter += deltaTime;
     if (dropCounter > dropInterval) {
-        player.position.y++;
-        dropCounter = 0;
+        playerDrop();
     }
 
     draw();
@@ -68,8 +73,7 @@ document.addEventListener('keydown', event => {
         player.position.x++;
     }
     else if (event.keyCode === 40) {
-        player.position.y++;
-        dropCounter = 0;
+        playerDrop();
     }
 });
 
