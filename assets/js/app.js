@@ -59,5 +59,19 @@ function update(time = 0) {
     requestAnimationFrame(update);
 }
 
+// Event listener on keydown
+document.addEventListener('keydown', event => {
+    if (event.keyCode === 37) {
+        player.position.x--;
+    }
+    else if (event.keyCode === 39) {
+        player.position.x++;
+    }
+    else if (event.keyCode === 40) {
+        player.position.y++;
+        dropCounter = 0;
+    }
+});
+
 // Initialize the game 
 update();
