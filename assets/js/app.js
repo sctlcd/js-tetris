@@ -3,17 +3,33 @@ const context = canvas.getContext('2d');
 
 context.scale(20, 20);
 
-context.fillStyle = 'darkgrey';
-context.fillRect(0, 0, canvas.width, canvas.height);
-
 const matrix = [
     [0, 0, 0],
     [1, 1, 1],
     [0, 1, 0],
 ];
 
+const player = {
+    position: { x: 5, y: 5 },
+    matrix: matrix,
+};
+
+let lastTime = 0;
+let dropCounter = 0;
+let dropInterval = 1000;
+
+// Drop player function
+function playerDrop() {
+    player.position.y++;
+    dropCounter = 0;
+}
+
 // General draw function 
 function draw() {
+    // Clearing the canvas
+    context.fillStyle = 'darkgrey';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
     drawMatrix(player.matrix, player.position);
 }
 
@@ -33,9 +49,33 @@ function drawMatrix(matrix, offset) {
     });
 };
 
-const player = {
-    position: { x: 5, y: 5 },
-    matrix: matrix,
+// Update function
+function update(time = 0) {
+    const deltaTime = time - lastTime;
+    lastTime = time;
+
+    // the tetromino drops every second
+    dropCounter += deltaTime;
+    if (dropCounter > dropInterval) {
+        playerDrop();
+    }
+
+    draw();
+    requestAnimationFrame(update);
 }
 
-draw();
+// Event listener on keydown
+document.addEventListener('keydown', event => {
+    if (event.keyCode === 37) {
+        player.position.x--;
+    }
+    else if (event.keyCode === 39) {
+        player.position.x++;
+    }
+    else if (event.keyCode === 40) {
+        playerDrop();
+    }
+});
+
+// Initialize the game 
+update();
