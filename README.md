@@ -40,8 +40,10 @@ Building a Tetris game in vanilla JavaScript, HTML and CSS
 4.	Once you have chose your desired option, then click the copy icon next to the URL.
 5.	Open Git Bash.
 6.	Ensure you are in the correct directory which you want to copy the code into. If not, change the directory.
-7.	In the terminal, write
-			´´´$ git clone https://github.com/sctlcd/js-tetris-in-progress.git´´´
+7.	In the terminal, write 
+    ```
+    $ git clone https://github.com/sctlcd/js-tetris-in-progress.git
+    ```
 8.	Press the enter button and your clone will be created.
 
 Back to [top](#TableOfContents)
