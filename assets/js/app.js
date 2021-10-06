@@ -3,7 +3,7 @@ const context = canvas.getContext('2d');
 
 context.scale(20, 20);
 
-const arena = createMatrix(12, 20);
+const board = createMatrix(12, 20);
 
 const matrix = [
     [0, 0, 0],
@@ -59,7 +59,19 @@ function drawMatrix(matrix, offset) {
             }
         });
     });
-};
+}
+
+// Merge function - Copy all the values from the player into the board 
+// at correct positions
+function merge(board, player) {
+    player.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value !== 0) {
+                board[y + player.position.y][x + player.position.x] = value;
+            }
+        });
+    });
+}
 
 // Update function
 function update(time = 0) {
