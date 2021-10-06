@@ -3,6 +3,8 @@ const context = canvas.getContext('2d');
 
 context.scale(20, 20);
 
+const arena = createMatrix(12, 20);
+
 const matrix = [
     [0, 0, 0],
     [1, 1, 1],
@@ -22,6 +24,16 @@ let dropInterval = 1000;
 function playerDrop() {
     player.position.y++;
     dropCounter = 0;
+}
+
+// Function create matrix
+function createMatrix(width, height) {
+    const matrix = [];
+    // while we have height, while height != 0 we decrese height with 1
+    while (height--) {
+        matrix.push(new Array(width).fill(0));
+    }
+    return matrix;
 }
 
 // General draw function 
