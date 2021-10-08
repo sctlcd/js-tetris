@@ -20,12 +20,6 @@ let lastTime = 0;
 let dropCounter = 0;
 let dropInterval = 1000;
 
-// Drop player function
-function playerDrop() {
-    player.position.y++;
-    dropCounter = 0;
-}
-
 // Function create matrix
 function createMatrix(width, height) {
     const matrix = [];
@@ -71,6 +65,26 @@ function merge(board, player) {
             }
         });
     });
+}
+
+// Drop player function
+function playerDrop() {
+    player.position.y++;
+    dropCounter = 0;
+}
+
+function collide(board, player) {
+    const [matrix, offset] = [player.matrix, player.position];
+    for (let y = 0; y < matrix.length; ++y) {
+        for (let x = 0; x < matrix[y].length; ++x) {
+            if (matrix[y][x] !== 0 &&
+                (board[y + offset.y] &&
+                    board[y + offset.y][x + offset.x] !== 0)) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // Update function
