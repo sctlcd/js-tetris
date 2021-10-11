@@ -52,6 +52,7 @@ function draw() {
     context.fillStyle = 'darkgrey';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
+    drawMatrix(board, { x: 0, y: 0 });
     drawMatrix(player.matrix, player.position);
 }
 
@@ -109,13 +110,21 @@ function update(time = 0) {
     requestAnimationFrame(update);
 }
 
+// Player move function 
+function playerMove(direction) {
+    player.position.x += direction;
+    if (collide(board, player)) {
+        player.position.x -= direction;
+    }
+}
+
 // Event listener on keydown
 document.addEventListener('keydown', event => {
     if (event.keyCode === 37) {
-        player.position.x--;
+        playerMove(-1);
     }
     else if (event.keyCode === 39) {
-        player.position.x++;
+        playerMove(1);
     }
     else if (event.keyCode === 40) {
         playerDrop();
