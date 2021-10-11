@@ -30,11 +30,9 @@ function collide(board, player) {
                 (board[y + off.y] &&
                     board[y + off.y][x + off.x]) !== 0) {
                 return true;
-                console.log("true");
             }
         }
     }
-    console.log("false");
     return false;
 }
 
@@ -73,10 +71,26 @@ function drawMatrix(matrix, offset) {
     });
 }
 
+// Merge function - Copy all the values from the player into the board 
+// at correct positions
+function merge(board, player) {
+    player.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value !== 0) {
+                board[y + player.position.y][x + player.position.x] = value;
+            }
+        });
+    });
+}
+
 // Drop player function
 function playerDrop() {
     player.position.y++;
-    console.log("before collide");
+    if (collide(board, player)) {
+        player.position.y--;
+        merge(board, player);
+        player.position.y = 0;
+    }
     dropCounter = 0;
 }
 
