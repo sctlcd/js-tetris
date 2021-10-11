@@ -52,6 +52,7 @@ function draw() {
     context.fillStyle = 'darkgrey';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
+    drawMatrix(board, { x: 0, y: 0 });
     drawMatrix(player.matrix, player.position);
 }
 
