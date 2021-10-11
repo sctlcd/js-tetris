@@ -20,6 +20,24 @@ let lastTime = 0;
 let dropCounter = 0;
 let dropInterval = 1000;
 
+// Collide function 
+function collide(board, player) {
+    const mat = player.matrix;
+    const off = player.position;
+    for (let y = 0; y < mat.length; ++y) {
+        for (let x = 0; x < mat[y].length; ++x) {
+            if (mat[y][x] !== 0 &&
+                (board[y + off.y] &&
+                    board[y + off.y][x + off.x]) !== 0) {
+                return true;
+                console.log("true");
+            }
+        }
+    }
+    console.log("false");
+    return false;
+}
+
 // Function create matrix
 function createMatrix(width, height) {
     const matrix = [];
@@ -55,36 +73,11 @@ function drawMatrix(matrix, offset) {
     });
 }
 
-// Merge function - Copy all the values from the player into the board 
-// at correct positions
-function merge(board, player) {
-    player.matrix.forEach((row, y) => {
-        row.forEach((value, x) => {
-            if (value !== 0) {
-                board[y + player.position.y][x + player.position.x] = value;
-            }
-        });
-    });
-}
-
 // Drop player function
 function playerDrop() {
     player.position.y++;
+    console.log("before collide");
     dropCounter = 0;
-}
-
-function collide(board, player) {
-    const [matrix, offset] = [player.matrix, player.position];
-    for (let y = 0; y < matrix.length; ++y) {
-        for (let x = 0; x < matrix[y].length; ++x) {
-            if (matrix[y][x] !== 0 &&
-                (board[y + offset.y] &&
-                    board[y + offset.y][x + offset.x] !== 0)) {
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
 // Update function
